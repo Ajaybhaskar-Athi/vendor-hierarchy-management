@@ -1,3 +1,7 @@
+import Providers from "./providers";
+import Link from "next/link";
+
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -19,10 +23,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className="antialiased">
+        <Providers>
+          <div>
+            <nav className="p-4 bg-gray-800 text-white">
+              <Link href="/" className="px-4">Home</Link>
+              <Link href="/dashboard" className="px-4">Dashboard</Link>
+              <Link href="/vendors" className="px-4">Vendors</Link>
+            </nav>
+            <main className="p-6">{children}</main>
+          </div>
+        </Providers>
       </body>
     </html>
   );

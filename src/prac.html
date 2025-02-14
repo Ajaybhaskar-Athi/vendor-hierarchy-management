@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Hierarchy Tree</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10 flex justify-center">
+
+    <div id="hierarchy" class="flex flex-col items-center"></div>
+
+    <script>
+        // Flat vendor data with parentId
+        const vendors = [
+            { id: 1, name: "Super Vendor", role: "Super", email: "super@vendor.com", parentId: null },
+            { id: 2, name: "Regional Vendor 1", role: "Regional", email: "regional1@vendor.com", parentId: 1 },
+            { id: 3, name: "Regional Vendor 2", role: "Regional", email: "regional2@vendor.com", parentId: 1 },
+            { id: 4, name: "Regional Vendor 3", role: "Regional", email: "regional3@vendor.com", parentId: 1 },
+            { id: 5, name: "City Vendor 1", role: "City", email: "city1@vendor.com", parentId: 2 },
+            { id: 6, name: "City Vendor 2", role: "City", email: "city2@vendor.com", parentId: 3 },
+            { id: 7, name: "City Vendor 3", role: "City", email: "city3@vendor.com", parentId: 4 },
+            { id: 8, name: "Local Vendor 1", role: "Local", email: "local1@vendor.com", parentId: 5 },
+            { id: 9, name: "Local Vendor 2", role: "Local", email: "local2@vendor.com", parentId: 6 }
+        ];
+
+        // Convert flat data to hierarchical structure
+        function buildHierarchy(data) {
+            const map = new Map();
+            const root = [];
+
+            data.forEach(v => map.set(v.id, { ...v, children: [] }));
+
+            data.forEach(v => {
+                if (v.parentId) {
+                    map.get(v.parentId).children.push(map.get(v.id));
+                } else {
+                    root.push(map.get(v.id));
+                }
+            });
+
+            return root;
+        }
+
+        function renderVendors(vendorList) {
+            if (!vendorList.length) return "";
+            
+            return `
+                <div class="flex justify-center items-start space-x-8 mt-6">
+                    ${vendorList.map(vendor => `
+                        <div class="relative flex flex-col items-center">
+                            <div class="vendor-card border ${getRoleClass(vendor.role)} p-4 rounded-md shadow-lg">
+                                <h3 class="font-bold">${vendor.name}</h3>
+                                <p class="text-sm text-gray-600">${vendor.role}</p>
+                            </div>
+                            ${vendor.children.length ? `
+                                <div class="w-0.5 h-6 bg-gray-400"></div>
+                                <div class="flex gap-6 mt-2">
+                                    ${renderVendors(vendor.children)}
+                                </div>
+                            ` : ""}
+                        </div>
+                    `).join("")}
+                </div>
+            `;
+        }
+
+        function getRoleClass(role) {
+            switch (role) {
+                case "Super": return "border-purple-500";
+                case "Regional": return "border-blue-500";
+                case "City": return "border-green-500";
+                case "Local": return "border-gray-500";
+                default: return "border-gray-300";
+            }
+        }
+
+        const hierarchy = buildHierarchy(vendors);
+        document.getElementById("hierarchy").innerHTML = renderVendors(hierarchy);
+    </script>
+
+    <style>
+        .vendor-card {
+            width: 180px;
+            text-align: center;
+            background: white;
+        }
+    </style>
+
+</body>
+</html>
