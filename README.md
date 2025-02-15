@@ -44,7 +44,7 @@ The Super Vendor has the highest level of control over all operations, including
 ### **Regional Vendor**
 The Regional Vendor manages fleets and city vendors but cannot modify higher-level entities.
 - **Dashboard**: Limited dashboard view with control over assigned fleets. Here you are not allowed to edit Super vendors
-  ![Regional Dashboard](./images/RegDB.png)
+  ![Regional Dashboard](./images/regDB.png)
 - **Regional Fleet Management**: Assigns vehicles to City Vendors that are children's of current Regional vendor.
   ![Regional Fleet Management](./images/RegFleet.png)
 - **Manage City Vendors**: Allows adding, editing, and removing City Vendors.
