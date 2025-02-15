@@ -1,91 +1,582 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendor Hierarchy Tree</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-10 flex justify-center">
+// "use client";
+// import { useSelector } from "react-redux";
+// import { Card } from "@/components/ui/card";
+// import { useState } from "react";
+// import { Pencil, Move } from "lucide-react";
+// import EditVendorDialog from "@/components/EditVendorDialog";
+// import MoveProfileDialog from "@/components/MoveProfileDialog";
 
-    <div id="hierarchy" class="flex flex-col items-center"></div>
+// const getRoleColor = (level) => {
+//     switch (level) {
+//       case "Super": return "bg-purple-500";
+//       case "Regional": return "bg-blue-500";
+//       case "City": return "bg-green-500";
+//       case "Local": return "bg-red-500";
+//       case "DeployAssociate": return "bg-orange-900"
+//       default: return "bg-gray-400";
+//     }
+//   };
+//   const getScaleFactor = (childrenCount) => {
+//       if (childrenCount > 6) return 0.6;
+//       if (childrenCount > 3) return 0.8;
+//       return 1;
+//     };
+  
+  
+//   const TreeNode = ({ vendor }) => {
+//     const { vendors } = useSelector((state) => state.vendors);
+//     const children = vendors.filter((v) => v.parentId === vendor.id);
+//     const scaleFactor = getScaleFactor(children.length);
+//     // console.log("Scale Factor: ",scaleFactor);
+//     const [openEdit, setOpenEdit] = useState(false);
+//     const [openMove, setOpenMove] = useState(false);
+  
+//     return (
+//       <div className="flex flex-col items-center relative">
+//         {/* Vendor Card with Circle */}
+//         <div className="flex flex-col items-center relative ">
+//           <div className={`absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 flex items-center justify-center rounded-full text-white text-xs font-bold ${getRoleColor(vendor.level)}`}>
+//             {vendor.shortForm}
+//           </div>
+//           <Card className={`p-4 bg-white shadow-md border rounded-lg text-center min-w-[200px] ${vendor.level === "Super" ? "border-purple-500" : ""}`}>
+//             <div className="flex justify-between items-center">
+//               <h3 className="font-bold text-lg ml-10 text-center ">{vendor.name}</h3>
+//               {vendor.level !== "Super" && (
+//                 <button onClick={() => setOpenEdit(true)} className="p-1 bg-gray-200 rounded-full hover:bg-gray-300">
+//                   <Pencil size={16} />
+//                 </button>
+//               )}
+//             </div>
+//             <p className="text-sm text-gray-500">{vendor.email}</p>
+//             {vendor.level === "City" && (
+//               <button className="mt-2 text-xs font-semibold px-2 py-1 rounded bg-gray-300" onClick={() => setOpenMove(true)}>
+//                 Move Profile
+//               </button>
+//             )}
+//           </Card>
+//         </div>
+  
+//         {/* Downward Line */}
+//         {children.length > 0 && <div className="w-1 h-6 bg-gray-400"></div>}
+        
+     
+//          {children.length > 0 && (
+//           <div
+//             className="flex justify-center mt-4 space-x-4 transition-all duration-300 relative"
+//             style={{ transform: `scale(${scaleFactor})` }}
+  
+//           >
+//             {children.map((child) => (
+//               <TreeNode key={child.id} vendor={child} />
+//             ))}
+//           </div>
+//         )}
+        
+//         {/* Dialogs */}
+//         <EditVendorDialog open={openEdit} onOpenChange={setOpenEdit} vendor={vendor} />
+//         <MoveProfileDialog open={openMove} onOpenChange={setOpenMove} vendor={vendor}/>
+//       </div>
+//     );
+//   };
+  
+  
+  
 
-    <script>
-        // Flat vendor data with parentId
-        const vendors = [
-            { id: 1, name: "Super Vendor", role: "Super", email: "super@vendor.com", parentId: null },
-            { id: 2, name: "Regional Vendor 1", role: "Regional", email: "regional1@vendor.com", parentId: 1 },
-            { id: 3, name: "Regional Vendor 2", role: "Regional", email: "regional2@vendor.com", parentId: 1 },
-            { id: 4, name: "Regional Vendor 3", role: "Regional", email: "regional3@vendor.com", parentId: 1 },
-            { id: 5, name: "City Vendor 1", role: "City", email: "city1@vendor.com", parentId: 2 },
-            { id: 6, name: "City Vendor 2", role: "City", email: "city2@vendor.com", parentId: 3 },
-            { id: 7, name: "City Vendor 3", role: "City", email: "city3@vendor.com", parentId: 4 },
-            { id: 8, name: "Local Vendor 1", role: "Local", email: "local1@vendor.com", parentId: 5 },
-            { id: 9, name: "Local Vendor 2", role: "Local", email: "local2@vendor.com", parentId: 6 }
-        ];
 
-        // Convert flat data to hierarchical structure
-        function buildHierarchy(data) {
-            const map = new Map();
-            const root = [];
+// const VendorNode=()=>{
+//      const { vendors } = useSelector((state) => state.vendors);
+//   const superVendor = vendors.find((v) => v.level === "Super");
+//   return (
+//     // <div className="p-6 w-full overflow-x-hidden flex justify-center">
+//     //     <h1 className="text-xl font-bold mb-4 text-center">Vendor Hierarchy</h1>
+//     //     <div className="flex flex-col items-center w-full">
+//     //       {superVendor && <VendorNode vendor={superVendor} />}
 
-            data.forEach(v => map.set(v.id, { ...v, children: [] }));
+//     //     </div>
+//     // </div>
+//     <div className="p-6 w-full overflow-x-hidden flex flex-col items-center">
+//     {/* <h1 className="text-xl font-bold mb-4">Vendor Hierarchy</h1> */}
+//     {superVendor && <TreeNode vendor={superVendor} />}
+//   </div>
+// );
+// }
 
-            data.forEach(v => {
-                if (v.parentId) {
-                    map.get(v.parentId).children.push(map.get(v.id));
-                } else {
-                    root.push(map.get(v.id));
-                }
-            });
+// export default VendorNode;  
 
-            return root;
-        }
 
-        function renderVendors(vendorList) {
-            if (!vendorList.length) return "";
-            
-            return `
-                <div class="flex justify-center items-start space-x-8 mt-6">
-                    ${vendorList.map(vendor => `
-                        <div class="relative flex flex-col items-center">
-                            <div class="vendor-card border ${getRoleClass(vendor.role)} p-4 rounded-md shadow-lg">
-                                <h3 class="font-bold">${vendor.name}</h3>
-                                <p class="text-sm text-gray-600">${vendor.role}</p>
-                            </div>
-                            ${vendor.children.length ? `
-                                <div class="w-0.5 h-6 bg-gray-400"></div>
-                                <div class="flex gap-6 mt-2">
-                                    ${renderVendors(vendor.children)}
-                                </div>
-                            ` : ""}
-                        </div>
-                    `).join("")}
+
+
+
+
+
+
+
+// "use client";
+// import { useSelector } from "react-redux";
+// import { Card } from "@/components/ui/card";
+// import { useState } from "react";
+// import { Pencil, Move } from "lucide-react";
+// import EditVendorDialog from "@/components/EditVendorDialog";
+// import MoveProfileDialog from "@/components/MoveProfileDialog";
+
+// // Function to get the color of the role for visual representation
+// const getRoleColor = (level) => {
+//   switch (level) {
+//     case "Super": return "bg-purple-500";
+//     case "Regional": return "bg-blue-500";
+//     case "City": return "bg-green-500";
+//     case "Local": return "bg-red-500";
+//     case "DeployAssociate": return "bg-orange-900";
+//     default: return "bg-gray-400";
+//   }
+// };
+
+// const VendorNode = () => {
+//   const { vendors } = useSelector((state) => state.vendors);
+  
+//   // State to track the selected vendor level
+//   const [selectedLevel, setSelectedLevel] = useState("City");
+
+//   // State for handling dialog visibility
+//   const [openEdit, setOpenEdit] = useState(false);
+//   const [openMove, setOpenMove] = useState(false);
+//   const [currentVendor, setCurrentVendor] = useState(null);
+
+//   // Get the vendors at the selected level
+//   const filteredVendors = vendors.filter((vendor) => vendor.level === selectedLevel);
+
+//   // Function to get the children of a vendor
+//   const getChildren = (vendorId) => vendors.filter((v) => v.parentId === vendorId);
+
+//   // BFS logic to group vendors in levels
+//   const groupVendorsByLevel = () => {
+//     const result = [];
+//     let currentLevelVendors = filteredVendors;
+//     let nextLevelVendors = [];
+
+//     // Start BFS by iterating over the filtered vendors
+//     while (currentLevelVendors.length > 0) {
+//       result.push(currentLevelVendors);
+
+//       // For each vendor in the current level, find its children for the next level
+//       currentLevelVendors.forEach((vendor) => {
+//         const children = getChildren(vendor.id);
+//         nextLevelVendors.push(...children);
+//       });
+
+//       // Move to the next level
+//       currentLevelVendors = nextLevelVendors;
+//       nextLevelVendors = [];
+//     }
+
+//     return result;
+//   };
+
+//   const groupedVendors = groupVendorsByLevel();
+
+//   // Handle change in vendor level
+//   const handleLevelChange = (e) => {
+//     setSelectedLevel(e.target.value);
+//   };
+
+//   // Handle edit button click
+//   const handleEditClick = (vendor) => {
+//     setCurrentVendor(vendor);
+//     setOpenEdit(true);
+//   };
+
+//   // Handle move button click
+//   const handleMoveClick = (vendor) => {
+//     setCurrentVendor(vendor);
+//     setOpenMove(true);
+//   };
+
+//   return (
+//     <div className="p-6 w-full overflow-x-hidden flex flex-col items-center">
+//       {/* Vendor Level Filter */}
+//       <div className="mb-4">
+//         <label htmlFor="level" className="mr-2">Filter by Vendor Level:</label>
+//         <select
+//           id="level"
+//           value={selectedLevel}
+//           onChange={handleLevelChange}
+//           className="p-2 border rounded-lg"
+//         >
+//           <option value="Super">Super</option>
+//           <option value="Regional">Regional</option>
+//           <option value="City">City</option>
+//           <option value="Local">Local</option>
+//           <option value="DeployAssociate">Deploy Associate</option>
+//         </select>
+//       </div>
+
+//       {/* Display Vendors in BFS style */}
+//       <div className="w-full">
+//         {groupedVendors.map((levelVendors, levelIndex) => (
+//           <div key={levelIndex} className="flex justify-center space-x-4 mt-4">
+//             {/* Create a gap between rows */}
+//             {levelVendors.map((vendor) => (
+//               <div key={vendor.id} className="flex flex-col items-center">
+//                 <div className={`relative ${levelIndex < groupedVendors.length - 1 ? "mb-4" : ""}`}>
+//                   {/* Thin line between vendors */}
+//                   {levelIndex < groupedVendors.length - 1 && (
+//                     <div className="w-1 h-6 bg-gray-400 absolute -top-6 left-1/2 transform -translate-x-1/2"></div>
+//                   )}
+//                   <div className={`absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 flex items-center justify-center rounded-full text-white text-xs font-bold ${getRoleColor(vendor.level)}`}>
+//                     {vendor.shortForm}
+//                   </div>
+//                   <Card className={`p-4 bg-white shadow-md border rounded-lg text-center min-w-[200px] ${vendor.level === "Super" ? "border-purple-500" : ""}`}>
+//                     <div className="flex justify-between items-center">
+//                       <h3 className="font-bold text-lg ml-10 text-center">{vendor.name}</h3>
+//                       {vendor.level !== "Super" && (
+//                         <button 
+//                           onClick={() => handleEditClick(vendor)} 
+//                           className="p-1 bg-gray-200 rounded-full hover:bg-gray-300"
+//                         >
+//                           <Pencil size={16} />
+//                         </button>
+//                       )}
+//                     </div>
+//                     <p className="text-sm text-gray-500">{vendor.email}</p>
+//                     {vendor.level === "City" && (
+//                       <button
+//                         className="mt-2 text-xs font-semibold px-2 py-1 rounded bg-gray-300"
+//                         onClick={() => handleMoveClick(vendor)}
+//                       >
+//                         Move Profile
+//                       </button>
+//                     )}
+//                   </Card>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         ))}
+//       </div>
+
+//       {/* Dialogs for Edit and Move */}
+//       {currentVendor && (
+//         <>
+//           <EditVendorDialog 
+//             open={openEdit} 
+//             onOpenChange={setOpenEdit} 
+//             vendor={currentVendor} 
+//           />
+//           <MoveProfileDialog 
+//             open={openMove} 
+//             onOpenChange={setOpenMove} 
+//             vendor={currentVendor}
+//           />
+//         </>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default VendorNode;
+
+
+
+
+
+
+// "use client";
+// import { useSelector } from "react-redux";
+// import { Card } from "@/components/ui/card";
+// import { useState } from "react";
+// import { Pencil ,Move} from "lucide-react";
+// import EditVendorDialog from "@/components/EditVendorDialog";
+// import MoveProfileDialog from "@/components/MoveProfileDialog";
+
+// // Function to get the color of the role for visual representation
+// const getRoleColor = (level) => {
+//   switch (level) {
+//     case "Super": return "bg-purple-500";
+//     case "Regional": return "bg-blue-500";
+//     case "City": return "bg-green-500";
+//     case "Local": return "bg-red-500";
+//     case "DeployAssociate": return "bg-orange-900";
+//     default: return "bg-gray-400";
+//   }
+// };
+
+// const VendorNode = () => {
+//   const { vendors } = useSelector((state) => state.vendors);
+//   const [selectedLevel, setSelectedLevel] = useState("City");
+
+//   // State to handle dialogs
+//   const [openEdit, setOpenEdit] = useState(false);
+//   const [openMove, setOpenMove] = useState(false);
+//   const [selectedVendor, setSelectedVendor] = useState(null);
+
+//   // Get the vendors at the selected level
+//   const filteredVendors = vendors.filter((vendor) => vendor.level === selectedLevel);
+
+//   // Recursive function to get all children under each vendor
+//   const getChildren = (vendorId) => vendors.filter((v) => v.parentId === vendorId);
+
+//   // Recursive function to generate the tree structure
+//   const generateVendorTree = (vendor) => {
+//     const children = getChildren(vendor.id);
+//     return (
+//       <div key={vendor.id} className="flex flex-col items-center relative">
+//         {/* Vendor Card */}
+//         <div className="relative">
+//           <div className={`absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 flex items-center justify-center rounded-full text-white text-xs font-bold ${getRoleColor(vendor.level)}`}>
+//             {vendor.shortForm}
+//           </div>
+//           <Card className={`p-4 bg-white shadow-md border rounded-lg text-center min-w-[200px] ${vendor.level === "Super" ? "border-purple-500" : ""}`}>
+//             <div className="flex justify-between items-center">
+//               <h3 className="font-bold text-lg ml-10 text-center">{vendor.name}</h3>
+//               {vendor.level !== "Super" && (
+//                 <>
+//                   <button
+//                     onClick={() => {
+//                       setSelectedVendor(vendor);
+//                       setOpenEdit(true);
+//                     }}
+//                     className="p-1 bg-gray-200 rounded-full hover:bg-gray-300"
+//                   >
+//                     <Pencil size={16} />
+//                   </button>
+//                   <button
+//                     onClick={() => {
+//                       setSelectedVendor(vendor);
+//                       setOpenMove(true);
+//                     }}
+//                     className="p-1 bg-gray-200 rounded-full hover:bg-gray-300 ml-2"
+//                   >
+//                     <Move size={16} />
+//                   </button>
+//                 </>
+//               )}
+//             </div>
+//             <p className="text-sm text-gray-500">{vendor.email}</p>
+//             {vendor.level === "City" && (
+//               <button className="mt-2 text-xs font-semibold px-2 py-1 rounded bg-gray-300">
+//                 Move Profile
+//               </button>
+//             )}
+//           </Card>
+//         </div>
+
+//         {/* Thin line under vendor */}
+//         <div className="absolute bottom-0 w-full border-t border-gray-300 mt-2"></div>
+
+//         {/* Render children recursively */}
+//         {children.length > 0 && (
+//           <div className="w-full mt-4 flex justify-center space-x-4">
+//             {children.map((child) => generateVendorTree(child))}
+//           </div>
+//         )}
+//       </div>
+//     );
+//   };
+
+//   // Handle change in vendor level
+//   const handleLevelChange = (e) => {
+//     setSelectedLevel(e.target.value);
+//   };
+
+//   return (
+//     <div className="p-6 w-full overflow-x-hidden flex flex-col items-center">
+//       {/* Vendor Level Filter */}
+//       <div className="mb-4">
+//         <label htmlFor="level" className="mr-2">Filter by Vendor Level:</label>
+//         <select
+//           id="level"
+//           value={selectedLevel}
+//           onChange={handleLevelChange}
+//           className="p-2 border rounded-lg"
+//         >
+//           <option value="Super">Super</option>
+//           <option value="Regional">Regional</option>
+//           <option value="City">City</option>
+//           <option value="Local">Local</option>
+//           <option value="DeployAssociate">Deploy Associate</option>
+//         </select>
+//       </div>
+
+//       {/* Display Vendors Hierarchically */}
+//       <div className="w-full">
+//         <div className="flex justify-center space-x-4 mt-4">
+//           {filteredVendors.map((vendor) => generateVendorTree(vendor))}
+//         </div>
+//       </div>
+
+//       {/* Edit and Move Profile Dialogs */}
+//       {selectedVendor && (
+//         <>
+//           <EditVendorDialog
+//             open={openEdit}
+//             onOpenChange={setOpenEdit}
+//             vendor={selectedVendor}
+//           />
+//           <MoveProfileDialog
+//             open={openMove}
+//             onOpenChange={setOpenMove}
+//             vendor={selectedVendor}
+//           />
+//         </>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default VendorNode;
+
+
+
+
+
+
+
+'use client'
+import { useSelector } from "react-redux";
+import { Card } from "@/components/ui/card";
+import { useState } from "react";
+import { Pencil, Move } from "lucide-react";
+import EditVendorDialog from "@/components/EditVendorDialog";
+import MoveProfileDialog from "@/components/MoveProfileDialog";
+
+// Function to get the color of the role for visual representation
+const getRoleColor = (level) => {
+  switch (level) {
+    case "Super": return "bg-purple-500";
+    case "Regional": return "bg-blue-500";
+    case "City": return "bg-green-500";
+    case "Local": return "bg-red-500";
+    case "DeployAssociate": return "bg-orange-900";
+    default: return "bg-gray-400";
+  }
+};
+
+const VendorNode = () => {
+  const { vendors } = useSelector((state) => state.vendors);
+  
+  // State to track the selected vendor level
+  const [selectedLevel, setSelectedLevel] = useState("City");
+
+  // Get the vendors at the selected level
+  const filteredVendors = vendors.filter((vendor) => vendor.level === selectedLevel);
+
+  // Function to get the children of a vendor
+  const getChildren = (vendorId) => vendors.filter((v) => v.parentId === vendorId);
+
+  // BFS logic to group vendors in levels
+  const groupVendorsByLevel = () => {
+    const result = [];
+    let currentLevelVendors = filteredVendors;
+    let nextLevelVendors = [];
+
+    // Start BFS by iterating over the filtered vendors
+    while (currentLevelVendors.length > 0) {
+      result.push(currentLevelVendors);
+
+      // For each vendor in the current level, find its children for the next level
+      currentLevelVendors.forEach((vendor) => {
+        const children = getChildren(vendor.id);
+        nextLevelVendors.push(...children);
+      });
+
+      // Move to the next level
+      currentLevelVendors = nextLevelVendors;
+      nextLevelVendors = [];
+    }
+
+    return result;
+  };
+
+  const groupedVendors = groupVendorsByLevel();
+
+  // Handle change in vendor level
+  const handleLevelChange = (e) => {
+    setSelectedLevel(e.target.value);
+  };
+
+  // State for dialogs
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openMove, setOpenMove] = useState(false);
+  const [selectedVendor, setSelectedVendor] = useState(null); // Track selected vendor for dialogs
+
+  // Open the Edit Dialog with the selected vendor
+  const handleEditClick = (vendor) => {
+    setSelectedVendor(vendor);
+    setOpenEdit(true);
+  };
+
+  // Open the Move Dialog with the selected vendor
+  const handleMoveClick = (vendor) => {
+    setSelectedVendor(vendor);
+    setOpenMove(true);
+  };
+
+  return (
+    <div className="p-6 w-full overflow-x-hidden flex flex-col items-center">
+      {/* Vendor Level Filter */}
+      <div className="mb-4">
+        <label htmlFor="level" className="mr-2">Filter by Vendor Level:</label>
+        <select
+          id="level"
+          value={selectedLevel}
+          onChange={handleLevelChange}
+          className="p-2 border rounded-lg"
+        >
+          <option value="Super">Super</option>
+          <option value="Regional">Regional</option>
+          <option value="City">City</option>
+          <option value="Local">Local</option>
+          <option value="DeployAssociate">Deploy Associate</option>
+        </select>
+      </div>
+
+      {/* Display Vendors in BFS style */}
+      <div className="w-full">
+        {groupedVendors.map((levelVendors, levelIndex) => (
+          <div key={levelIndex} className="flex justify-center space-x-4 mt-4">
+            {levelVendors.map((vendor) => (
+              <div key={vendor.id} className="flex flex-col items-center">
+                <div className={`relative`}>
+                  <div className={`absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 flex items-center justify-center rounded-full text-white text-xs font-bold ${getRoleColor(vendor.level)}`}>
+                    {vendor.shortForm}
+                  </div>
+                  <Card className={`p-4 bg-white shadow-md border rounded-lg text-center min-w-[200px] ${vendor.level === "Super" ? "border-purple-500" : ""}`}>
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-bold text-lg ml-10 text-center">{vendor.name}</h3>
+                      {vendor.level !== "Super" && (
+                        <button onClick={() => handleEditClick(vendor)} className="p-1 bg-gray-200 rounded-full hover:bg-gray-300">
+                          <Pencil size={16} />
+                        </button>
+                      )}
+                    </div>
+                    <p className="text-sm text-gray-500">{vendor.email}</p>
+                    {vendor.level === "City" && (
+                      <button onClick={() => handleMoveClick(vendor)} className="mt-2 text-xs font-semibold px-2 py-1 rounded bg-gray-300">
+                        <Move size={16} />
+                        Move Profile
+                      </button>
+                    )}
+                  </Card>
                 </div>
-            `;
-        }
+                {/* Thin line under each node */}
+                <div className="w-full h-[1px] bg-gray-300 mt-2"></div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
 
-        function getRoleClass(role) {
-            switch (role) {
-                case "Super": return "border-purple-500";
-                case "Regional": return "border-blue-500";
-                case "City": return "border-green-500";
-                case "Local": return "border-gray-500";
-                default: return "border-gray-300";
-            }
-        }
+      {/* Dialogs for Edit and Move Profile */}
+      {selectedVendor && (
+        <>
+          <EditVendorDialog open={openEdit} onOpenChange={setOpenEdit} vendor={selectedVendor} />
+          <MoveProfileDialog open={openMove} onOpenChange={setOpenMove} vendor={selectedVendor} />
+        </>
+      )}
+    </div>
+  );
+};
 
-        const hierarchy = buildHierarchy(vendors);
-        document.getElementById("hierarchy").innerHTML = renderVendors(hierarchy);
-    </script>
+export default VendorNode;
 
-    <style>
-        .vendor-card {
-            width: 180px;
-            text-align: center;
-            background: white;
-        }
-    </style>
 
-</body>
-</html>
