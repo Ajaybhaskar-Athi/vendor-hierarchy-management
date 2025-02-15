@@ -14,7 +14,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   rolePermissions: {
     "Super": ["Manage Vendors", "View Fleet Status", "Assign Roles","Manage Roles"],
-    "Regional": ["Manage City Vendors", "Onboard Drivers","Manage Regional Fleet"],
+    "Regional": ["Manage City Vendors","Manage Regional Fleet"],
     "City": ["Manage Fleet", "Onboard Drivers"],
     "Local": ["Deploy Tasks"],
     "DeployAssociate": ["View Tasks"],

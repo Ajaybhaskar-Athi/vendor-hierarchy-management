@@ -18,7 +18,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   vehicles: [], // Vehicles assigned to the logged-in Regional Vendor  by the Super vendor
-  cityVendorAssignments: {}, // Mapping of City Vendor IDs to assigned vehicle IDs
+  cityVendorAssignments: {
+    
+  }, // Mapping of City Vendor IDs to assigned vehicle IDs
+  // vehicles: [
+  //   { id: "VH006", status: "Deployed", assignedCityVendor: 5, location: "Mysuru, Karnataka" },
+  //   { id: "VH014", status: "Available", assignedCityVendor: null, location: "Bengaluru, Karnataka" }
+  // ],
+  // cityVendorAssignments: {
+  //   5: ["VH006"],
+  //   7: ["VH009"]
+  // }
 };
 
 const regionalFleetSlice = createSlice({

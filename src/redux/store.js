@@ -4,7 +4,8 @@ import authReducer from "./authSlice";
 import permissionsReducer from "./permissionSlice";
 import fleetReducer from "./fleetSlice";
 import regionalFleetSlice from "./regionalFleetSlice"
-
+import deployAssociatesReducer from "./deployAssociateSlice";
+import subVendorReducer from "./subVendorSlice"
 export const store = configureStore({
   reducer: {
     vendors: vendorReducer,
@@ -12,6 +13,8 @@ export const store = configureStore({
     permissions: permissionsReducer,
     fleet: fleetReducer,
     regionalFleet: regionalFleetSlice,
+    deployAssociates: deployAssociatesReducer,
+    subVendor: subVendorReducer
   },
 });
 

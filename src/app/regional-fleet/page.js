@@ -60,7 +60,7 @@ export default function ManageFleet() {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-semibold mb-6 text-center">Manage Fleet</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-center">  Assigns vehicles to City Vendors </h2>
 
       {/* Vehicles Assigned to Regional Vendor */}
       <div className="mb-8">
@@ -69,7 +69,7 @@ export default function ManageFleet() {
           <thead>
             <tr className="bg-gray-200">
               <th className="border p-3">Vehicle ID</th>
-              <th className="border p-3">Vehicle Type</th>
+              {/* <th className="border p-3">Vehicle Type</th> */}
               <th className="border p-3">Status</th>
               <th className="border p-3">Assigned City Vendor</th>
               <th className="border p-3">Actions</th>
@@ -80,13 +80,16 @@ export default function ManageFleet() {
               vehicles.map((vehicle) => (
                 <tr key={vehicle.id} className="border text-center">
                   <td className="p-3 border">{vehicle.id}</td>
-                  <td className="p-3 border">{vehicle.type || "N/A"}</td>
+                  {/* <td className="p-3 border">{vehicle.type || "N/A"}</td> */}
                   <td className="p-3 border">{vehicle.status}</td>
                   <td className="p-3 border">
-                    {vehicle.assignedCityVendor
-                      ? `City Vendor ${vehicle.assignedCityVendor}`
-                      : "Not Assigned"}
-                  </td>
+  {vehicle.assignedCityVendor
+    ? (cityVendors.find(v => v.id === vehicle.assignedCityVendor)?.name || `City Vendor ${vehicle.assignedCityVendor}`)
+    : "Not Assigned"}
+    
+  {/* {vehicle.assignedCityVendor !== null && vehicle.assignedCityVendor !== undefined ? "Assigned" : "Not Assigned"} */}
+</td>
+
                   <td className="p-3 border">
                     {vehicle.assignedCityVendor ? (
                       <Button
@@ -110,6 +113,7 @@ export default function ManageFleet() {
                 </td>
               </tr>
             )}
+
           </tbody>
         </table>
       </div>
@@ -150,7 +154,7 @@ export default function ManageFleet() {
           <tbody>
             {Object.entries(cityVendorAssignments).length > 0 ? (
               Object.entries(cityVendorAssignments).map(([vendorId, assignedVehicles]) => {
-                const vendor = memoizedCityVendors.find((v) => v.id === vendorId);
+                const vendor = memoizedCityVendors.find((v) => v.id ===Number(vendorId));
                 return (
                   <tr key={vendorId} className="border text-center">
                     <td className="p-3 border">{vendorId}</td>

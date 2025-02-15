@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Vendor Management System
 
-## Getting Started
+## Overview
+A role-based vendor management system built using **Next.js** and **Redux** (UI only). This system manages fleets, vendors, and driver assignments.
 
-First, run the development server:
+## Features
+- **Super Vendor**: Manages all vendors, roles, and fleet assignments.
+- **Regional Vendor**: Assigns vehicles to City Vendors.
+- **City Vendor**: Onboards and assigns drivers to vehicles.
+- **Local Vendor**: Manages deployed drivers and vehicles.
+- **Deployment Associate**: Views assigned tasks.
 
-```bash
+## Installation
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Screenshots
+- **Login Page**: `login.png`
+- **Home Page**: `home.png`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### **Super Vendor**
+- **Dashboard** (`SupDB.png`): Full control over all nodes, edit and move any.
+- **Manage Vendors** (`SupManageVendors.png`): List all vendors, add/edit/delete.
+- **View Fleet** (`SupViewFleet.png`): Displays car availability and assigns to Regional Vendors.
+- **Manage Roles** (`SupManageRoles.png`): Controls navigation permissions for all roles.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **Regional Vendor**
+- **Dashboard** (`RegDB.png`): Edit only current and lower-level roles.
+- **Regional Fleet Management** (`RegFleet.png`): Assigns cars to City Vendors.
+- **Manage City Vendors** (`RegManageCity.png`): Add, delete, edit City Vendors.
 
-## Learn More
+### **City Vendor**
+- **Dashboard** (`CityDB.png`)
+- **Onboard Drivers** (`CityOnboard.png`): Add drivers, upload documents, assign vehicles.
 
-To learn more about Next.js, take a look at the following resources:
+### **Local Vendor**
+- **Dashboard** (`LocDB.png`)
+- **Deployed Tasks** (`LocDeployed.png`): Manages vehicle deployment and assigned drivers.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Deployment Associate**
+- **Dashboard** (`DepDB.png`)
+- **View Tasks** (`DepTasks.png`): Displays assigned tasks.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
+- The system dynamically fetches assigned vehicles based on roles.
+- Role-based permissions control which actions and data each user can access.
 
-## Deploy on Vercel
+## License
+MIT
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

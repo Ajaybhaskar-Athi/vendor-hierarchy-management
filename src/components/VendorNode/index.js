@@ -42,14 +42,19 @@ const TreeNode = ({ vendor }) => {
   const scaleFactor = getScaleFactor(children.length);
   const [openEdit, setOpenEdit] = useState(false);
   const [openMove, setOpenMove] = useState(false);
-
+  
   // Check if user has permission to edit this vendor
   const canEdit =
-    user?.role === "Super Vendor" ||
-    (user?.role === "Regional Vendor" && vendor.level !== "Super") ||
-    (user?.role === "City Vendor" && vendor.level !== "Super" && vendor.level !== "Regional") ||
-    (user?.role === "Local Vendor" && vendor.level === "DeployAssociate");
+    user?.level === "Super" ||
+    (user?.level === "Regional" && vendor.level !== "Super") ||
+    (user?.level === "City" && vendor.level !== "Super" && vendor.level !== "Regional") ||
+    (user?.level === "Local" && vendor.level === "DeployAssociate");
 
+      const canMove= 
+       user?.level === "Super" ||
+      (user?.level === "Regional") ||
+      (user?.level === "City") ;
+  
   return (
     <div className="flex flex-col items-center relative">
       <div className="flex flex-col items-center relative">
@@ -77,7 +82,7 @@ const TreeNode = ({ vendor }) => {
             )}
           </div>
           <p className="text-sm text-gray-500">{vendor.email}</p>
-          {vendor.level === "City" && (
+          {vendor.level === "City" && canMove &&(
             <button
               className="mt-2 text-xs font-semibold px-2 py-1 rounded bg-gray-300"
               onClick={() => setOpenMove(true)}

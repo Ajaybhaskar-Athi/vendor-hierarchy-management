@@ -27,14 +27,14 @@ export default function AddVendorDialog({ open, onClose, user, vendors }) {
 
   // Get Allowed Vendor Levels (User Can Add Below Their Role)
   const getAllowedVendorLevels = () => {
-    switch (user.role) {
-      case 'Super Vendor':
+    switch (user.level) {
+      case 'Super':
         return ['Super','Regional', 'City', 'Local', 'DeployAssociate'];
-      case 'Regional Vendor':
+      case 'Regional':
         return ['Regional','City', 'Local', 'DeployAssociate'];
-      case 'City Vendor':
+      case 'City':
         return ['City','Local', 'DeployAssociate'];
-      case 'Local Vendor':
+      case 'Local':
         return ['Local','DeployAssociate'];
       default:
         return [];
