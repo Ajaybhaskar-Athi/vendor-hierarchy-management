@@ -17,36 +17,61 @@ npm run dev
 ```
 
 ## Screenshots
-- **Login Page**: `login.png`
-- **Home Page**: `home.png`
+
+### **Login & Home Page**
+These are the entry points to the system where users authenticate and access their dashboards.
+- **Login Page**: ![Login Page](./images/login.png)
+- **Home Page**: ![Home Page](./images/home.png)
+- **Edit Operation**: ![Home Page](./images/edit.png)
+- **move Operation**: ![Home Page](./images/move.png)
+
 
 ### **Super Vendor**
-- **Dashboard** (`SupDB.png`): Full control over all nodes, edit and move any.
-- **Manage Vendors** (`SupManageVendors.png`): List all vendors, add/edit/delete.
-- **View Fleet** (`SupViewFleet.png`): Displays car availability and assigns to Regional Vendors.
-- **Manage Roles** (`SupManageRoles.png`): Controls navigation permissions for all roles.
+The Super Vendor has the highest level of control over all operations, including managing vendors, assigning fleets, and defining roles.
+- **Dashboard**: The central control panel for Super Vendors.
+  ![Super Vendor Dashboard](./images/SupDB.png)
+- **Manage Vendors**: View, add, edit, and delete vendor nodes in a structured table.
+  ![Manage Vendors](./images/SupManageVendors.png)
+- **View Fleet**: Displays available cars and their details. Cars are assigned to Regional Vendors here.
+  ![View Fleet-1](./images/SupViewFleet.png)
+  ![View Fleet-2](./images/SupViewFleet2.png)
+
+- **Manage Roles**: Controls navigation permissions for each role.
+  ![Manage Roles-1](./images/SupManageRoles.png)
+  ![Manage Roles-2](./images/SupManageRoles2.png)
+
 
 ### **Regional Vendor**
-- **Dashboard** (`RegDB.png`): Edit only current and lower-level roles.
-- **Regional Fleet Management** (`RegFleet.png`): Assigns cars to City Vendors.
-- **Manage City Vendors** (`RegManageCity.png`): Add, delete, edit City Vendors.
+The Regional Vendor manages fleets and city vendors but cannot modify higher-level entities.
+- **Dashboard**: Limited dashboard view with control over assigned fleets. Here you are not allowed to edit Super vendors
+  ![Regional Dashboard](./images/RegDB.png)
+- **Regional Fleet Management**: Assigns vehicles to City Vendors that are children's of current Regional vendor.
+  ![Regional Fleet Management](./images/RegFleet.png)
+- **Manage City Vendors**: Allows adding, editing, and removing City Vendors.
+  ![Manage City Vendors](./images/RegManageCity.png)
 
 ### **City Vendor**
-- **Dashboard** (`CityDB.png`)
-- **Onboard Drivers** (`CityOnboard.png`): Add drivers, upload documents, assign vehicles.
+City Vendors focus on driver onboarding and vehicle assignments.
+- **Dashboard**: Similar to the regional dashboard but limited to City Vendor controls.
+  ![City Vendor Dashboard](./images/CityDB.png)
+- **Onboard Drivers**: Facilitates driver onboarding, document collection, and vehicle assignments.
+  ![Onboard Drivers](./images/CityOnboard.png)
 
 ### **Local Vendor**
-- **Dashboard** (`LocDB.png`)
-- **Deployed Tasks** (`LocDeployed.png`): Manages vehicle deployment and assigned drivers.
+Local Vendors manage vehicle deployment and driver allocations.
+- **Dashboard**: Displays assigned vehicles and deployment options.
+  ![Local Vendor Dashboard](./images/LocDB.png)
+- **Deployed Tasks**: Lists drivers and their assigned vehicles.
 
 ### **Deployment Associate**
-- **Dashboard** (`DepDB.png`)
-- **View Tasks** (`DepTasks.png`): Displays assigned tasks.
+Deployment Associates can only view their assigned tasks.
+- **Dashboard**: Displays their personal task assignments.
+  ![Deployment Associate Dashboard](./images/DepDB.png)
+- **View Tasks**: Shows the tasks assigned to the associate.
+  ![View Tasks](./images/DepTasks.png)
 
-## Notes
+## Note
 - The system dynamically fetches assigned vehicles based on roles.
 - Role-based permissions control which actions and data each user can access.
 
-## License
-MIT
 

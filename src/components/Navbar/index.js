@@ -29,7 +29,7 @@ const Navbar = () => {
           {canAccess("Onboard Drivers") && <Link href="/onboard-drivers" className="px-4">Onboard  Drivers</Link>}  
           {/* {canAccess("Manage Fleet") && <Link href="/manage-fleet" className="px-4">Manage Fleet</Link>} */}
           {canAccess("View Tasks") && <Link href="/view-tasks" className="px-4">View Tasks</Link>}
-          {canAccess("Deploy Tasks") && <Link href="/manage-fleet" className="px-4"> Deployed Tasks</Link>}
+          {/* {canAccess("Deploy Tasks") && <Link href="/manage-fleet" className="px-4"> Deployed Tasks</Link>} */}
 
 
 
