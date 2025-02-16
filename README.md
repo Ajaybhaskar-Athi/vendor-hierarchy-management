@@ -29,7 +29,7 @@ These are the entry points to the system where users authenticate and access the
 ### **Super Vendor**
 The Super Vendor has the highest level of control over all operations, including managing vendors, assigning fleets, and defining roles.
 - **Dashboard**: The central control panel for Super Vendors.
-  ![Super Vendor Dashboard](./images/SupDB.png)
+  ![Super Vendor Dashboard](./images/supDB.png)
 - **Manage Vendors**: View, add, edit, and delete vendor nodes in a structured table.
   ![Manage Vendors](./images/SupManageVendors.png)
 - **View Fleet**: Displays available cars and their details. Cars are assigned to Regional Vendors here.
@@ -53,7 +53,7 @@ The Regional Vendor manages fleets and city vendors but cannot modify higher-lev
 ### **City Vendor**
 City Vendors focus on driver onboarding and vehicle assignments.
 - **Dashboard**: Similar to the regional dashboard but limited to City Vendor controls.
-  ![City Vendor Dashboard](./images/CityDB.png)
+  ![City Vendor Dashboard](./images/cityDB.png)
 - **Onboard Drivers**: Facilitates driver onboarding, document collection, and vehicle assignments.
   ![Onboard Drivers](./images/CityOnboard.png)
 
